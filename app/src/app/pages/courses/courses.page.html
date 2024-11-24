@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""  default-href="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Bioinsumos</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col *ngFor="let course of courses" size="12" size-md="10">
+        <ion-card color="light" mode="md">
+          <img class="card--image" [alt]="course.name" [src]="course.imgPath"/>
+          
+          <ion-card-header>
+            <ion-card-title class="card--title" color="dark">{{course.name}}</ion-card-title>
+            <!--<ion-card-subtitle>Card Subtitle</ion-card-subtitle>-->
+          </ion-card-header>
+        
+          <!--<ion-card-content>
+            <ion-text color="medium"><p>{{course.description}}</p></ion-text>
+          </ion-card-content>-->
+
+          <ion-grid style="padding-bottom: 10px;">
+            <ion-row class="ion-justify-content-evenly ion-align-items-center">
+              <ion-col size="4">
+                <ion-button expand="full" size="default" shape="round" class="asproc--btn" (click)="playVideo(course.courseId, course.name, course.description)">
+                  <ion-icon name="videocam-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button expand="full" size="default" shape="round" class="asproc--btn" (click)="downloadCoursePdf(course.courseId)">
+                  <ion-icon name="book-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-alert
+  [isOpen]="error"
+  header="Error"
+  message="Parece que ocurrio un error, por favor intenté más tarde."
+  [buttons]="errorBtns"
+  (didDismiss)="setError(false)"
+></ion-alert>

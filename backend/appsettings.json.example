@@ -1,0 +1,51 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "devDbConnectionString": "server=mariadb;port=3306;database=Bioinsumos;user=YOUR_MARIADB_IMAGE_USER;password=YOUR_MARIADB_IMAGE_PASSWORD"
+  },
+  "Memcached": {
+    "Servers": [
+      {
+        "Address": "memcached",
+        "Port": 11211
+      }
+    ]
+  },
+  "JwtSettings": {
+    "key": "YOUR_JWT_KEY"
+  },
+  "Kestrel": {
+    "Limits": {
+      "MaxRequestBodySize": 2147483648
+    }
+  },
+  "AWS": {
+    "Profile": "YOUR_AWS_PROFILE",
+    "Region": "YOUR_AWS_REGION",
+    "AccessKey": "YOUR_AWS_ACCESSKEY",
+    "SecretKey": "YOUR_SECRETKEY",
+    "S3Bucket": "YOUR_S3BUCKET",
+    "S3BucketVideoFolder": "YOUR_S3BUCKET_VIDEO_FOLDER",
+    "S3BucketPdfFolder": "YOUR_S3BUCKET_PDF_FOLDER",
+    "S3BucketHandbookFolder": "YOUR_S3BUCKET_HANDBOOK_IMG_FOLDER",
+    "S3BucketNewsFolder": "YOUR_S3BUCKET_NEWS_IMG_FOLDER",
+    "S3BucketPriceFolder": "YOUR_S3BUCKET_PRICE_IMG_FOLDER",
+    "S3BucketProductFolder": "YOUR_S3BUCKET_PRODUCT_IMG_FOLDER",
+    "S3BucketWheaterAlertFolder": "YOUR_S3BUCKET_WHEATER_ALERT_IMG_FOLDER",
+    "S3BucketCourseFolder": "YOUR_S3BUCKET_COURSE_IMG_FOLDER",
+    "S3CDN": "YOUR_CDN_CLOUDFRONT_PREFIX"
+  },
+  "SessionParams": {
+    "TimeoutMinutes": 30
+  },
+  "EmailHost": "YOUR_EMAIL_SMTP_HOST",
+  "EmailUserName": "YOUR_EMAIL_SMTP_ACCOUNT_USERNAME",
+  "EmailPassword": "YOUR_EMAIL_SMTP_ACCOUNT_PASSWORD",
+  "EmailRecipient": "YOUR_EMAIL_RECIPIENT"
+}

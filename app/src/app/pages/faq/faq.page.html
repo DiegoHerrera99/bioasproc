@@ -1,0 +1,106 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""  default-href="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Preguntas frecuentes</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="12" size-md="10">
+        <ion-searchbar mode="ios"  [debounce]="1000" (ionInput)="handleSearchInput($event)" placeholder="Buscar"></ion-searchbar>
+      </ion-col>
+      
+      <ion-col size="11" size-md="10" *ngFor="let result of limitedSearchResult" class="information-card">
+        <ion-card mode="md">
+          <ion-card-header>
+            <ion-grid>
+              <ion-row class="ion-justify-content-start ion-align-items-center">
+                <ion-col size="auto">
+                  <ion-icon color="green-asproc" size="large" name="help-circle-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="10" size-md="auto">
+                  <ion-label color="dark" class="information-card--title">{{result.question}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-text class="information-card--body" color="medium">
+              {{result.answer}}
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="11" size-md="10" *ngIf="searchResult.length > sizeLimit && limitedSearchResult.length < searchResult.length">
+        <ion-button shape="round" expand="full" class="asproc--btn" (click)="showMore()">
+          <ion-icon slot="start" name="add-outline"></ion-icon>
+          Ver más
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-text><h4>¿No encuentras tu duda en las preguntas frecuentes? ¡Escríbenos y nuestros expertos te responderán!</h4></ion-text>
+      </ion-col>
+
+      <ion-col size="11" size-md="10" style="margin-bottom: 10px;">
+        <app-contact-form (onLoading)="setLoading(!!$event)" (onError)="setError(!!$event)" (onSuccess)="setEmailSuccess(!!$event)"></app-contact-form>
+      </ion-col>
+
+      <ion-col size="11" size-md="10">
+        <ion-text><p>Siguenos en nuestras redes sociales</p></ion-text>
+      </ion-col>
+
+      <ion-col size="11" size-md="10" style="margin-top: -20px;">
+        <ion-button size="large" shape="round" color="dark" style="margin-right: 16px;" (click)="openInBrowser('https://instagram.com/asproc.comalapa?igshid=YmMyMTA2M2Y=')">
+          <ion-icon size="large" slot="icon-only" name="logo-instagram"></ion-icon>
+        </ion-button>
+        <ion-button size="large" shape="round" color="dark" style="margin-right: 16px;" (click)="openInBrowser('https://www.facebook.com/profile.php?id=100070591561621&mibextid=LQQJ4d')">
+          <ion-icon size="large" slot="icon-only" name="logo-facebook"></ion-icon>
+        </ion-button>
+        <ion-button size="large" shape="round" color="dark" style="margin-right: 16px;" (click)="openInBrowser('https://www.tiktok.com/@asproc.comalapa')">
+          <ion-icon size="large" slot="icon-only" name="logo-tiktok"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="11" size-md="10">
+        <ion-text><p>¿Quieres visitarnos?</p></ion-text>
+      </ion-col>
+
+      <ion-col size="11" size-md="10" style="margin-top: -20px;">
+        <ion-button size="large" shape="round" color="dark" style="margin-right: 16px;" (click)="openInBrowser(wazeUrl)">
+          <ion-icon class="custom-icon" size="large" slot="icon-only" src="assets/icon/waze.svg"></ion-icon>
+        </ion-button>
+
+        <ion-button size="large" shape="round" color="dark" style="margin-right: 16px;" (click)="openInBrowser(googleMapsUrl)">
+          <ion-icon class="custom-icon" size="large" slot="icon-only" src="assets/icon/google-maps.svg"></ion-icon>
+        </ion-button>
+
+        <ion-button size="large" shape="round" color="dark" (click)="openInBrowser('https://wa.me/50232295247')">
+          <ion-icon size="large" slot="icon-only" name="logo-whatsapp"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-alert
+  [isOpen]="error"
+  header="Error"
+  message="Parece que ocurrio un error, por favor intenté más tarde."
+  [buttons]="errorBtns"
+  (didDismiss)="setError(false)"
+></ion-alert>
+
+<ion-alert
+  [isOpen]="emailSuccess"
+  header="Exito"
+  message="Tu consulta fue envíada a nuestros expertos, trataremos de responderte lo antes posible."
+  [buttons]="successBtns"
+  (didDismiss)="setEmailSuccess(false)"
+></ion-alert>

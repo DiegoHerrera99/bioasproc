@@ -1,0 +1,100 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""  default-href="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Precios de hortalizas</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+
+      <ion-col size="12" size-md="10">
+        <ion-searchbar mode="ios"  [debounce]="1000" (ionInput)="handleSearchInput($event)" placeholder="Buscar"></ion-searchbar>
+      </ion-col>
+
+      <!--<ion-col size="12" size-md="10">
+        <ion-text><h4 style="margin-left: 20px;">Precios actualizados de hortalizas de primera calidad</h4></ion-text>
+      </ion-col>-->
+
+      <ion-col size="12" size-md="10" *ngFor="let product of limitedSearchResult">
+        <ion-card color="light" mode="md">
+          <img class="card--image" [alt]="product.title" [src]="product.imgPath"/>
+          
+          <ion-card-header>
+            <ion-card-title class="card--title" color="dark">{{product.title}}</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-row class="ion-justify-content-between ion-align-items-center">
+              <ion-col size="9">
+                <ion-text color="medium" class="product--description">
+                  <h2>
+                    {{product.description}}
+                  </h2>
+                </ion-text>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-text color="dark" class="product--price">
+                  <h2>
+                    {{product.price1 | currency:'GTQ':'symbol-narrow':'1.2-2'}}
+                  </h2>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!--<ion-col size="12" size-md="10" style="margin-top: -20px;">
+        <ion-list inset="true">
+          <ion-item *ngFor="let product of limitedSearchResult" color="light">
+            <ion-grid>
+              <ion-row class="ion-justify-content-between ion-align-items-center">
+                <ion-col size="auto">
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-start ion-align-items-center">
+                      <ion-col size="auto">
+                        <ion-thumbnail><img [alt]="product.title" [src]="product.imgPath"/></ion-thumbnail>
+                      </ion-col>
+                      <ion-col size="auto">
+                        <ion-text color="dark" class="product--title"><p>{{product.title}}</p></ion-text>
+                        <ion-text color="dark" class="product--description"><p>{{product.description}}</p></ion-text>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+      
+                <ion-col size="3">
+                  <ion-text color="dark" class="product--price"><p>{{product.price1 | currency:'GTQ':'symbol-narrow':'1.2-2'}}</p></ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-col>-->
+
+      <ion-col size="12" size-md="10"  style="margin-left: 20px;">
+        <ion-text size="small" color="medium"><p>Fuente: FASAGUA - CENMA</p></ion-text>
+      </ion-col>
+
+      <ion-col size="12" size-md="10" *ngIf="searchResult.length > sizeLimit && limitedSearchResult.length < searchResult.length">
+        <ion-button shape="round" expand="full" class="asproc--btn" (click)="showMoreNews()">
+          <ion-icon slot="start" name="add-outline"></ion-icon>
+          Más precios
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-alert
+  [isOpen]="error"
+  header="Error"
+  message="Parece que ocurrio un error, por favor intenté más tarde."
+  [buttons]="errorBtns"
+  (didDismiss)="setError(false)"
+></ion-alert>

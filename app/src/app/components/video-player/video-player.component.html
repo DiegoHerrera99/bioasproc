@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Volver</ion-button>
+    </ion-buttons>
+    <ion-title>{{name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="course--content">
+    <video controls [src]="cdn" type="video/mp4"></video>
+    <div class="course--description">
+      <ion-text color="dark" class="title">
+        <h5>Conocé más sobre este bioinsumo</h5>
+      </ion-text>
+      <ion-text color="medium" class="body">
+        {{description}}
+      </ion-text>
+    </div>
+  </div>
+</ion-content>

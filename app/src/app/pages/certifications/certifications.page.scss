@@ -1,0 +1,30 @@
+.information-card--title {
+    font-size: 16px;
+}
+
+.information-card--body {
+    font-size: 14px;
+} 
+
+h5 {
+    margin: 0px;
+    padding: 0px;
+}
+
+video {
+    width: 100%; /* Toma todo el ancho de la pantalla */
+    height: auto; /* Ajusta la altura automáticamente */
+}
+
+.handbook-title--container {
+    display: flex;
+    gap: 10px;
+    >.badge--container{
+        padding-top: 10px;
+    }
+}
+
+.title {
+    font-weight: 700;
+}
+  

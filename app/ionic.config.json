@@ -1,0 +1,7 @@
+{
+  "name": "bioAsprocApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

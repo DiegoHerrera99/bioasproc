@@ -1,0 +1,14 @@
+<form #f="ngForm">
+  <ion-input required name="name" autocomplete="name" ngModel label="Nombre completo" label-placement="floating" fill="solid" placeholder="Tu nombre completo" mode="md" color="dark" errorText="Este campo es obligatorio"></ion-input>
+
+  <ion-input name="email" autocomplete="email" type="email" ngModel label="Correo electrónico" label-placement="floating" fill="solid" placeholder="Tu correo electrónico" mode="md" color="dark"></ion-input>
+
+  <ion-input required name="phone" autocomplete="tel" type="tel" ngModel label="Teléfono" label-placement="floating" fill="solid" placeholder="Tu número de teléfono" mode="md" color="dark" errorText="Este campo es obligatorio"></ion-input>
+
+  <ion-textarea required name="question" ngModel label="Pregunta" labelPlacement="floating" fill="solid" placeholder="Escribe tu pregunta..." mode="md" color="dark" errorText="Este campo es obligatorio"></ion-textarea>
+
+  <ion-button shape="round" expand="full" class="asproc--btn" (click)="onSubmit(f)" [disabled]="f.invalid">
+    <ion-icon slot="start" name="send-outline"></ion-icon>
+    Envíar
+  </ion-button>
+</form>

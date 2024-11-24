@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""  default-href="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Diplomado</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+
+      <ion-col size="11" *ngFor="let handbook of handbooks let first = first;">
+        <ion-text>
+          <div class="handbook-title--container" *ngIf="first; else onlyText">
+            <h4>{{handbook.name}}</h4>
+            <div class="badge--container">
+              <ion-badge color="success">Nuevo</ion-badge>
+            </div>
+          </div>
+
+          <ng-template #onlyText>
+            <h4>{{handbook.name}}</h4>
+          </ng-template>
+        </ion-text>
+        <ion-button shape="round" expand="full" class="asproc--btn" style="margin-top: 18px;" (click)="downloadHandbook(handbook.handbookId)">
+          <ion-icon slot="start" name="download-outline"></ion-icon>
+          {{handbook.description}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="11" *ngIf="certificationInformation.length > 0">
+        <ion-text><h4>Información general</h4></ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <video controls src="/assets/videos/diplomado.mp4"></video>
+      </ion-col>
+
+      <ion-col size="11" size-md="10" *ngFor="let informationItem of certificationInformation" class="information-card">
+        <ion-card mode="md">
+          <ion-card-header>
+            <ion-card-title class="title">
+              {{informationItem.title}}
+            </ion-card-title>
+            <!--<ion-grid>
+              <ion-row class="ion-justify-content-start ion-align-items-center">
+                <!--<ion-col size="auto">
+                  <ion-icon color="green-asproc" size="large" name="information-circle-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="10" size-md="auto">
+                  <ion-text color="dark" class="information-card--title">
+                    <h5>
+                      {{informationItem.title}}
+                    </h5>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>-->
+          </ion-card-header>
+          <ion-card-content>
+            <ion-text class="information-card--body" color="medium">
+              {{informationItem.body}}
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-alert
+  [isOpen]="error"
+  header="Error"
+  message="Parece que ocurrio un error, por favor intenté más tarde."
+  [buttons]="errorBtns"
+  (didDismiss)="setError(false)"
+></ion-alert>

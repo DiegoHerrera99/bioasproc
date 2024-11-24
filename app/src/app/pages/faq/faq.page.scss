@@ -1,0 +1,19 @@
+.information-card--title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.information-card--body {
+    font-size: 14px;
+} 
+
+.custom-icon {
+    fill: var(--icon-color-dark);
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .custom-icon {
+        fill: var(--icon-color-light);
+    }
+}

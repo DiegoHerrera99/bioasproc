@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - ConnectionStrings__devDbConnectionString=Server=mariadb;Port=3306;Database=Bioinsumos;User=YOUR_MARIADB_IMAGE_USER;Password=YOUR_MARIADB_IMAGE_PASSWORD;
+      - Memcached__Servers__0__Address=memcached
+      - Memcached__Servers__0__Port=11211
+      - JwtSettings__key=YOUR_JWT_KEY
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - mariadb
+      - memcached
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: YOUR_MARIADB_IMAGE_PASSWORD
+      MYSQL_DATABASE: Bioinsumos
+    ports:
+      - "55000:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  memcached:
+    image: memcached:latest
+    ports:
+      - "11211:11211"
+
+volumes:
+  mariadb_data:

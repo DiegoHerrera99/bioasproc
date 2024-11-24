@@ -1,0 +1,10 @@
+<ion-app>
+  <div *ngIf="showWelcomeScreen">
+    <app-welcome-screen (clickEvent)="setShowWelcomeScreen(!$event)"></app-welcome-screen>
+  </div>
+
+  <ng-container *ngIf="!showWelcomeScreen">
+    <ion-router-outlet></ion-router-outlet>
+    <app-bottom-nav-bar></app-bottom-nav-bar>
+  </ng-container>
+</ion-app>

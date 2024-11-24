@@ -1,0 +1,9 @@
+form {
+    width: 100%;
+    >ion-input, >ion-textarea {
+        margin-bottom: 22px;
+    }
+    >ion-button {
+        margin-top: 4px;
+    }
+}
